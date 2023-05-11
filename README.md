@@ -31,6 +31,7 @@ WindowAPI로 처음 코딩을 하게되면서 가장 고민하면서 가장 쾌�
 
 ex) 사용예시
 
+```jsx
 void CShadow::Render(HDC hDC)
 {
 	int iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
@@ -81,6 +82,7 @@ void CShadow::Render(HDC hDC)
 	DeleteObject(SelectObject(AlphaDC, OldTempDC));
 	DeleteDC(AlphaDC);
 }
+```
 
 # 코드 부연 설명
 
@@ -92,6 +94,7 @@ TCHAR*	m_pFrameKey;    → 이미지를 찾기위한 키값입니다.
 
 map<const TCHAR*, CBitMap*>	m_mapBit; // map 자료구조를 통해 CBitMap 주소를 가져옵니다.
 
+```jsx
 HDC CBmpMgr::Find_Img(const TCHAR* pImageKey)
 {
 	auto	iter = find_if(m_mapBit.begin(), m_mapBit.end(), CTag_Finder(pImageKey));
@@ -101,10 +104,11 @@ HDC CBmpMgr::Find_Img(const TCHAR* pImageKey)
 
 	return iter->second->Get_MemDC();
 }
-
+```
 
 CTag_Finder라는 함수객체를 통하여 찾게 됩니다.
 
+```jsx
 class CTag_Finder
 {
 public:
@@ -124,5 +128,6 @@ public:
 private:
 	const TCHAR*		m_pKey;
 };
+```
 
 ()연산자를 오버로딩하여 함수 템플릿을 구현하였습니다.
